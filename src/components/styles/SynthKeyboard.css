@@ -1,0 +1,11 @@
+#piano-wrapper {
+	margin: 0px; padding: 0px;
+	height: 240px;
+  border-top: 5px solid black;
+
+	position: relative;
+  background: black;
+
+	display: flex;
+	flex-flow: row nowrap;
+}

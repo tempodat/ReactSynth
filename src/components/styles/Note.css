@@ -1,0 +1,63 @@
+note {
+	display: inline;
+	position: relative;
+}
+
+note.white {
+  background: #f0f0f0;
+  height: 240px;
+  border: solid black;
+
+  width: 36px;
+  border-width: 0px 2px 0px 2px;
+}
+
+note.white:hover {
+  background: #fbfbfb;
+
+  width: 38px;
+  border-width: 0px 1px 0px 1px;
+}
+
+note.white.playing {
+  top: 1px;
+  height: 233px;
+  background: #fdfdfd;
+  border-radius: 0px 0px 2px 2px;
+
+  width: 38px;
+  border-width: 0px 1px 0px 1px;
+}
+
+note.black {
+  top: 0px;
+  left: 10px;
+  width: 20px;
+  height: 120px;
+  background: #333;
+  z-index: 2;
+  border-radius: 0 0 2px 2px;
+}
+
+note.black:hover {
+  background: #666;
+}
+
+note.black.playing {
+  border-bottom-width:2px;
+  height:123px;
+}
+
+.n0,.n2,.n5,.n7,.n9 {
+  margin-right: -20px;
+}
+
+/*First & Last child handling*/
+
+note:first-child {
+  border-radius: 10px 0px 0px 10px !important;
+}
+
+note:last-child {
+  border-radius: 0px 10px 10px 0px !important;
+}
