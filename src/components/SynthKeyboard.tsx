@@ -3,11 +3,11 @@ import Note from './Note';
 
 import './styles/SynthKeyboard.css';
 
-const SynthKeyboard = (props) => {
+const SynthKeyboard: React.FC<{ keyPressed: Function }> = (props) => {
   const [pressed, setPressed] = useState(Array(48).fill(false));
-  const updatePressed = (index, value) => { setPressed(pressed.map((v, i) => i===index ? value : v)); }
+  const updatePressed = (index: number, value: boolean) => { setPressed(pressed.map((v, i) => i===index ? value : v)); }
 
-  const setKey = (index, value) => {
+  const setKey = (index: number, value: boolean) => {
     /* ignore calls that don't give us new info */
     if (pressed[index] === value) return;
 
@@ -15,7 +15,7 @@ const SynthKeyboard = (props) => {
     props.keyPressed(index, value);
   }
 
-  const onMouseMove = (index, down, over) => {
+  const onMouseMove = (index: number, down: boolean, over: boolean) => {
     /* it is possible that, depending on how robust js event capturing is, this can be simplified to:
     if (down) setKey(index, over);
     This eliminates a call to setKey everytime unpressed mouse moves out of key, which is a lot.
@@ -28,17 +28,21 @@ const SynthKeyboard = (props) => {
     }
   }
 
-  const onMouseClick = (index, down) => {
+  const onMouseClick = (index: number, down: boolean) => {
     setKey(index, down);
   }
 
+  const createNote = (index: number) => React.createElement(Note, {
+    key: index,
+    index: index,
+    pressed: pressed[index],
+    onMouseMove: onMouseMove,
+    onMouseClick: onMouseClick
+  });
+
   return (
     <div id="piano-wrapper" draggable="false">
-      {
-        [...Array(48).keys()].map((index) => {
-          return <Note index={index} onMouseMove={onMouseMove} onMouseClick={onMouseClick} pressed={pressed[index]}/>
-        })
-      }
+      { [...Array(48).keys()].map(createNote) }
     </div>
   )
 }

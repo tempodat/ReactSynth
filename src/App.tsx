@@ -7,8 +7,8 @@ function App() {
   const ac = new AudioContext();
 
   return (
-    <div class="container">
-      <Synth audioContext={ac}/>
+    <div className="container">
+      <Synth context={ac}/>
     </div>
   );
 }

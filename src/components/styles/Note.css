@@ -1,10 +1,10 @@
-note {
+.note {
 	display: inline;
 	position: relative;
   box-sizing: border-box;
 }
 
-note.white {
+.note.white {
   background: #f0f0f0;
   height: 240px;
   border: solid black;
@@ -13,13 +13,13 @@ note.white {
   border-width: 0px 2px 0px 2px;
 }
 
-note.white:hover {
+.note.white:hover {
   background: #fbfbfb;
 
   border-width: 0px 1px 0px 1px;
 }
 
-note.white.playing {
+.note.white.playing {
   top: 1px;
   height: 233px;
   background: #fdfdfd;
@@ -28,7 +28,7 @@ note.white.playing {
   border-width: 0px 1px 0px 1px;
 }
 
-note.black {
+.note.black {
   top: 0px;
   left: 10px;
 
@@ -40,11 +40,11 @@ note.black {
   border-radius: 0 0 4px 4px;
 }
 
-note.black:hover {
+.note.black:hover {
   background: #666;
 }
 
-note.black.playing {
+.note.black.playing {
   border-bottom-width:2px;
   height:123px;
 }
@@ -55,10 +55,10 @@ note.black.playing {
 
 /*First & Last child handling*/
 
-note:first-child {
+.note:first-child {
   border-radius: 10px 0px 0px 10px !important;
 }
 
-note:last-child {
+.note:last-child {
   border-radius: 0px 10px 10px 0px !important;
 }

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './styles/SynthSettings.css';
 
-const SynthSettings = (props) => {
+const SynthSettings: React.FC<{ handle: Function }> = (props) => {
   
   const [waveform, setWaveform] = useState('sine');
   const [volume, setVolume] = useState(0.5);
@@ -23,7 +23,7 @@ const SynthSettings = (props) => {
       </div>
       <div id="volume">
         <p>Volume: </p>
-        <input type="range" min="0" max="1" step="0.01" onInput={(e) => setVolume(e.target.valueAsNumber)}/>
+        <input type="range" min="0" max="1" step="0.01" onInput={(e) => {setVolume((e.target as HTMLInputElement).valueAsNumber)}}/>
       </div>
       <div id="enable">
         <p>Active: </p>
