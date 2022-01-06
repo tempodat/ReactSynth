@@ -11,7 +11,7 @@ const Note = (props) => {
   return (
     <note
       index={props.index}
-      class={`note ${color} n${noteValue} o${noteOctave}`}
+      class={`note ${color} n${noteValue} o${noteOctave} ${props.pressed ? 'playing' : ''}`}
       onMouseOver={(e) => {props.onMouseMove(props.index, mouseDown(e), true)}}
       onMouseOut={(e) => {props.onMouseMove(props.index, mouseDown(e), false)}}
       onMouseDown={(e) => {props.onMouseClick(props.index, mouseDown(e))}}

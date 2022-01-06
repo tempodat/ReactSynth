@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Note from './Note';
 
 import './styles/SynthKeyboard.css';
 
 const SynthKeyboard = (props) => {
-  const pressed = {};
-  [...Array(48).keys()].map((i) => {pressed[i] = false});
+  const [pressed, setPressed] = useState(Array(48).fill(false));
+  const updatePressed = (index, value) => { setPressed(pressed.map((v, i) => i===index ? value : v)); }
 
   const setKey = (index, value) => {
     /* ignore calls that don't give us new info */
     if (pressed[index] === value) return;
 
-    pressed[index] = value;
+    updatePressed(index, value);
     props.keyPressed(index, value);
   }
 
@@ -36,7 +36,7 @@ const SynthKeyboard = (props) => {
     <div id="piano-wrapper" draggable="false">
       {
         [...Array(48).keys()].map((index) => {
-          return <Note index={index} onMouseMove={onMouseMove} onMouseClick={onMouseClick}/>
+          return <Note index={index} onMouseMove={onMouseMove} onMouseClick={onMouseClick} pressed={pressed[index]}/>
         })
       }
     </div>

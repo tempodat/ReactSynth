@@ -1,6 +1,7 @@
 note {
 	display: inline;
 	position: relative;
+  box-sizing: border-box;
 }
 
 note.white {
@@ -8,14 +9,13 @@ note.white {
   height: 240px;
   border: solid black;
 
-  width: 36px;
+  width: 40px;
   border-width: 0px 2px 0px 2px;
 }
 
 note.white:hover {
   background: #fbfbfb;
 
-  width: 38px;
   border-width: 0px 1px 0px 1px;
 }
 
@@ -24,19 +24,20 @@ note.white.playing {
   height: 233px;
   background: #fdfdfd;
   border-radius: 0px 0px 2px 2px;
-
-  width: 38px;
+  
   border-width: 0px 1px 0px 1px;
 }
 
 note.black {
   top: 0px;
   left: 10px;
+
   width: 20px;
   height: 120px;
+
   background: #333;
   z-index: 2;
-  border-radius: 0 0 2px 2px;
+  border-radius: 0 0 4px 4px;
 }
 
 note.black:hover {
