@@ -20,12 +20,10 @@
 }
 
 .note.white.playing {
-  top: 1px;
-  height: 233px;
   background: #fdfdfd;
   border-radius: 0px 0px 2px 2px;
   
-  border-width: 0px 1px 0px 1px;
+  border-width: 5px 1px 5px 1px;
 }
 
 .note.black {
