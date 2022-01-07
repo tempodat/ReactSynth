@@ -1,98 +1,10 @@
-import React, {useRef} from 'react';
-import { keys } from 'ts-transformer-keys';
+import React, { useRef } from 'react';
 import SynthKeyboard from './SynthKeyboard';
 import SynthSettings from './SynthSettings';
-import helpers from '../helpers';
+import { IDictionary, ISynthSettings } from '../Interfaces';
+import Voice from '../classes/Voice';
 
 import './styles/Synth.css';
-
-interface SynthOption<T> {
-  value: T;
-  change: (value: T) => void;
-}
-
-interface IDictionary {
-  [key: string]: any;
-}
-
-interface ISynthSettings {
-  waveform: SynthOption<string>;
-  volume: SynthOption<number>;
-  enabled: SynthOption<boolean>;
-  octave: SynthOption<number>;
-  [key: string]: any;
-}
-
-interface IVoiceOptions {
-  index? : number;
-  octave? : number;
-  enabled? : boolean;
-  waveform? : string;
-}
-
-
-class Voice {
-  readonly context: AudioContext;
-  readonly parent: AudioNode;
-  readonly osc: OscillatorNode;
-  readonly gain: GainNode;
-
-  private _index: number;
-  private _octave: number;
-  private _enabled: boolean;
-  private _waveform: OscillatorType;
-
-  constructor (context: AudioContext, parent: AudioNode, settings: ISynthSettings, index: number) {
-    /* set up properties */
-    this._index = index;
-    this._octave = settings.octave.value;
-    this._enabled = settings.enabled.value;
-    this._waveform = settings.waveform.value as OscillatorType;
-
-    /* set up AudioContext system */
-    this.context = context;
-    this.parent = parent;
-    
-    this.osc = context.createOscillator();
-    this.osc.type = this._waveform;
-    this.osc.frequency.value = this.frequency;
-
-    this.gain = context.createGain();
-    this.gain.gain.value = 1;
-    this.gain.connect(parent);
-    
-    this.osc.connect(this.gain);
-    this.osc.start();
-  }
-
-  get index() : number { return this._index; }
-  get octave() : number { return this._octave; }
-  get enabled() : boolean { return this._enabled; }
-  get waveform() : OscillatorType { return this._waveform; }
-
-  get frequency() : number { return helpers.synth.indexToFrequency(this._index + this._octave * 12); }
-
-  updateVoice (options: IVoiceOptions) {
-    if (typeof options.index !== 'undefined') {
-      this._index = options.index;
-      this.osc.frequency.value = this.frequency;
-    }
-
-    if (typeof options.octave !== 'undefined') {
-      this._octave = options.octave;
-      this.osc.frequency.value = this.frequency;
-    }
-
-    if (typeof options.waveform !== 'undefined') {
-      this.osc.type = options.waveform as OscillatorType;
-    }
-
-    if (typeof options.enabled !== 'undefined') {
-      this._enabled = options.enabled;
-      this.gain.gain.value = +options.enabled;
-    }
-  }
-}
 
 const Synth: React.FC<{ context: AudioContext }> = (props) => {
   /* SynthSettings system */
@@ -127,7 +39,7 @@ const Synth: React.FC<{ context: AudioContext }> = (props) => {
   
   let voices: Voice[] = [];
 
-  const updateVoices = (options: IVoiceOptions) => {
+  const updateVoices = (options: object) => {
     /* Update all voices with updateVoice */
     voices.map(voice => { voice.updateVoice(options) });
   }
